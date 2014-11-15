@@ -46,6 +46,8 @@ proguard/
 .gradle
 build
 gradle.properties
+*.properties
+.properties
 
 #IntelliJ IDEA
 .idea

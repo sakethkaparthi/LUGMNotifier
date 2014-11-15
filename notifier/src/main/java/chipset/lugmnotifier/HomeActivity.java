@@ -27,6 +27,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.nispok.snackbar.Snackbar;
 import com.parse.FindCallback;
@@ -61,6 +62,7 @@ public class HomeActivity extends ActionBarActivity {
     ActionBarDrawerToggle actionBarDrawerToggle;
     ListView notificationListView, drawerListView;
     SwipeRefreshLayout notificationSwipeRefreshLayout;
+    ProgressBar notificationLoadingProgressBar;
     Functions functions = new Functions();
     String[] title = new String[1];
     String[] detail = new String[1];
@@ -75,6 +77,8 @@ public class HomeActivity extends ActionBarActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        notificationLoadingProgressBar = (ProgressBar) findViewById(R.id.notifications_loading_progress_bar);
+        notificationLoadingProgressBar.setVisibility(View.VISIBLE);
         try {
             flag = getIntent().getExtras().getBoolean(KEY_SHOW);
             value = getIntent().getExtras().getString(KEY_TITLE);
@@ -135,6 +139,7 @@ public class HomeActivity extends ActionBarActivity {
                     @Override
                     public void done(List<ParseObject> parseObjects, ParseException e) {
                         notificationSwipeRefreshLayout.setRefreshing(false);
+                        notificationLoadingProgressBar.setVisibility(View.GONE);
                         if (e == null) {
                             if (parseObjects.size() == 0) {
                                 title = new String[1];
@@ -171,6 +176,7 @@ public class HomeActivity extends ActionBarActivity {
                     }
                 });
             } else {
+                notificationLoadingProgressBar.setVisibility(View.GONE);
                 notificationSwipeRefreshLayout.setRefreshing(false);
                 Snackbar.with(getApplicationContext()) // context
                         .text("No Internet Connection") // text to display

@@ -1,4 +1,4 @@
-package chipset.lugmnotifier;
+package chipset.lugmnotifier.activites;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -39,6 +39,7 @@ import com.parse.ParseUser;
 
 import java.util.List;
 
+import chipset.lugmnotifier.R;
 import chipset.lugmnotifier.resources.Functions;
 import chipset.lugmnotifier.resources.NotificationListViewAdapter;
 
@@ -74,7 +75,7 @@ public class HomeActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar_home);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         notificationLoadingProgressBar = (ProgressBar) findViewById(R.id.notifications_loading_progress_bar);
@@ -279,7 +280,7 @@ public class HomeActivity extends ActionBarActivity {
                 });
                 builder.setTitle("About");
                 builder.setMessage("Get notifications and details about all the workshops and events being conducted by Linux Users Group (LUG), Manipal. No registration required.\n\nDeveloped and maintained by CHIPSET\n\nSource code for the app can be found at:");
-                builder.setNegativeButton("RATE THE APP", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton("RATE & REVIEW THE APP", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         if (functions.isConnected(HomeActivity.this)) {
